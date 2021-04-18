@@ -3,7 +3,7 @@ import { urls } from "./urls.config";
 export class RealEstateConfig {
   private url = null;
   private readonly maxPrice: number = 50000;
-  private readonly cities = ["san-isidro", "vicente-lopez"];
+  private readonly cities: string[] = ["san-isidro", "vicente-lopez"];
 
   constructor(readonly realEstate: string) {
     this.url = urls[realEstate];
