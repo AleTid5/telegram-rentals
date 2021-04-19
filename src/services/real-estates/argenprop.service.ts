@@ -33,10 +33,6 @@ export class ArgenpropService implements RealEstateServiceInterface {
     return new Promise((res) => res(this.results));
   }
 
-  getError(): string {
-    return this.error;
-  }
-
   private scrapSite = async (city, page = 1): Promise<void> => {
     try {
       const {
@@ -57,4 +53,8 @@ export class ArgenpropService implements RealEstateServiceInterface {
       this.error = error;
     }
   };
+
+  getError(): string {
+    return this.error;
+  }
 }
