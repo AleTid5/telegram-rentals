@@ -4,12 +4,12 @@ import scrapeIt from "scrape-it";
 import {
   RealEstateInterface,
   RealEstateServiceInterface,
-} from "../../interfaces/real_estate.interface";
+} from "../../interfaces/real-estate.interface";
 import argenpropContract from "../../contracts/argenprop.contract";
 import {
   MERCADO_LIBRE,
   RealEstateConfig,
-} from "../../config/real_estates.config";
+} from "../../config/real-estates.config";
 
 const [SAN_ISIDRO, VICENTE_LOPEZ] = ["TUxBQ1NBTjg4ZmJk", "TUxBQ1ZJQ2E3MTQz"];
 

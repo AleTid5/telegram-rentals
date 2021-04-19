@@ -3,8 +3,8 @@ import { ScheduleModule } from "@nestjs/schedule";
 
 import { ScrapperService } from "../services/scrapper.service";
 import { ScrapperWorker } from "../workers/scrapper.worker";
-import { RealEstateServiceInterface } from "../interfaces/real_estate.interface";
-import realEstates from "../services/real_estates";
+import { RealEstateServiceInterface } from "../interfaces/real-estate.interface";
+import realEstates from "../services/real-estates";
 
 @Module({
   imports: [ScheduleModule.forRoot(), HttpModule],

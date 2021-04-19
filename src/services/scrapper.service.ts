@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { RealEstateServiceInterface } from "../interfaces/real_estate.interface";
+import { RealEstateServiceInterface } from "../interfaces/real-estate.interface";
 
 @Injectable()
 export class ScrapperService {

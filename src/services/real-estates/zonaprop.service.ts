@@ -2,7 +2,7 @@ import { HttpService, Injectable } from "@nestjs/common";
 import scrapeIt from "scrape-it";
 
 import zonapropContract from "../../contracts/zonaprop.contract";
-import { RealEstateServiceInterface } from "../../interfaces/real_estate.interface";
+import { RealEstateServiceInterface } from "../../interfaces/real-estate.interface";
 
 @Injectable()
 export class ZonapropService implements RealEstateServiceInterface {

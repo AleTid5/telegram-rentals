@@ -4,9 +4,9 @@ import scrapeIt from "scrape-it";
 import {
   RealEstateInterface,
   RealEstateServiceInterface,
-} from "../../interfaces/real_estate.interface";
+} from "../../interfaces/real-estate.interface";
 import argenpropContract from "../../contracts/argenprop.contract";
-import { ARGENPROP, RealEstateConfig } from "../../config/real_estates.config";
+import { ARGENPROP, RealEstateConfig } from "../../config/real-estates.config";
 
 const [SAN_ISIDRO, VICENTE_LOPEZ] = ["san-isidro", "vicente-lopez"];
 
