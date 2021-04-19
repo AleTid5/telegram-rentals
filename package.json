@@ -22,9 +22,11 @@
   "dependencies": {
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
+    "@nestjs/mongoose": "^7.2.4",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/schedule": "^0.4.3",
     "@types/cheerio": "^0.22.9",
+    "mongoose": "^5.12.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",

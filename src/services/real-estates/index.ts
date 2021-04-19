@@ -8,7 +8,7 @@ import { ArgenpropService } from "./argenprop.service";
 const realEstates: Type[] = [
   ArgenpropService,
   MercadolibreService,
-  ZonapropService,
+  //ZonapropService,
 ];
 
 export default realEstates;

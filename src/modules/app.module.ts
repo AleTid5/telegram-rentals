@@ -1,11 +1,12 @@
 import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
 
 import { AppController } from "../controllers/app.controller";
 import { AppService } from "../services/app.service";
 import { ScrapperModule } from "./scrapper.module";
 
 @Module({
-  imports: [ScrapperModule],
+  imports: [MongooseModule.forRoot("mongodb://localhost/nest"), ScrapperModule],
   controllers: [AppController],
   providers: [AppService],
 })

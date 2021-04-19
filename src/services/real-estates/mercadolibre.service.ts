@@ -1,9 +1,7 @@
 import { HttpService, Injectable } from "@nestjs/common";
 
-import {
-  RealEstateInterface,
-  RealEstateServiceInterface,
-} from "../../interfaces/real-estate.interface";
+import { ApartmentInterface } from "../../interfaces/apartment.interface";
+import { RealEstateServiceInterface } from "../../interfaces/real-estate.interface";
 import {
   MERCADO_LIBRE,
   RealEstateConfig,
@@ -17,11 +15,11 @@ export class MercadolibreService implements RealEstateServiceInterface {
   private readonly cities: string[] = [SAN_ISIDRO, VICENTE_LOPEZ];
   private readonly config = new RealEstateConfig(MERCADO_LIBRE);
   private error: string = null;
-  private results: RealEstateInterface[] = [];
+  private results: ApartmentInterface[] = [];
 
   constructor(private httpService: HttpService) {}
 
-  async fetchData(): Promise<object[]> {
+  async findApartments(): Promise<ApartmentInterface[]> {
     console.log("Fetching MercadoLibre...");
 
     await Promise.all(
@@ -38,7 +36,7 @@ export class MercadolibreService implements RealEstateServiceInterface {
 
   private fetchAPI = async (city, offset = 0): Promise<void> => {
     try {
-      const getResults = async (): Promise<RealEstateInterface[]> =>
+      const getResults = async (): Promise<ApartmentInterface[]> =>
         new Promise((res) => {
           this.httpService
             .get(this.config.generateURL(city, offset))
@@ -46,6 +44,7 @@ export class MercadolibreService implements RealEstateServiceInterface {
               res(
                 results.map(({ id, permalink: link, price }) => ({
                   id,
+                  realEstate: MERCADO_LIBRE,
                   link,
                   price,
                 })),
@@ -53,7 +52,7 @@ export class MercadolibreService implements RealEstateServiceInterface {
             });
         });
 
-      const results: RealEstateInterface[] = await getResults();
+      const results: ApartmentInterface[] = await getResults();
 
       this.results.push(...results);
 
@@ -67,5 +66,9 @@ export class MercadolibreService implements RealEstateServiceInterface {
 
   getError(): string {
     return this.error;
+  }
+
+  getName(): string {
+    return MERCADO_LIBRE;
   }
 }

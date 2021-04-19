@@ -1,9 +1,14 @@
+import { ARGENPROP } from "../config/real-estates.config";
+
 const argenpropContract = {
   listItem: ".listing__items > .listing__item",
   data: {
     id: {
       selector: "span.card__favourite",
       attr: "data-favourite",
+    },
+    realEstate: {
+      convert: () => ARGENPROP,
     },
     link: {
       selector: "a.card",

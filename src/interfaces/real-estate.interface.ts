@@ -1,10 +1,7 @@
-export interface RealEstateServiceInterface {
-  fetchData(): Promise<object[]>;
-  getError(): string;
-}
+import { ApartmentInterface } from "./apartment.interface";
 
-export interface RealEstateInterface {
-  id: number;
-  link: string;
-  price: number;
+export interface RealEstateServiceInterface {
+  findApartments(): Promise<ApartmentInterface[]>;
+  getError(): string;
+  getName(): string;
 }
