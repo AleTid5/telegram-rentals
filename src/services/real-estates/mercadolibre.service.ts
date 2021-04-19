@@ -1,11 +1,9 @@
 import { HttpService, Injectable } from "@nestjs/common";
-import scrapeIt from "scrape-it";
 
 import {
   RealEstateInterface,
   RealEstateServiceInterface,
 } from "../../interfaces/real-estate.interface";
-import argenpropContract from "../../contracts/argenprop.contract";
 import {
   MERCADO_LIBRE,
   RealEstateConfig,
