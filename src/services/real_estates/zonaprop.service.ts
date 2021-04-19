@@ -2,18 +2,17 @@ import { HttpService, Injectable } from "@nestjs/common";
 import scrapeIt from "scrape-it";
 
 import zonapropContract from "../../contracts/zonaprop.contract";
-import { RealEstateInterface } from "../../interfaces/real_estate.interface";
+import { RealEstateServiceInterface } from "../../interfaces/real_estate.interface";
 
 @Injectable()
-export class ZonapropService implements RealEstateInterface {
-  error: string = null;
-
-  #cities = ["san-isidro", "vicente-lopez"];
+export class ZonapropService implements RealEstateServiceInterface {
+  private error: string = null;
+  private readonly cities = ["san-isidro", "vicente-lopez"];
 
   async fetchData(): Promise<object[]> {
     console.log("Fetching Zonaprops...");
 
-    await this.#scrapSite(this.#cities[0]);
+    await this.scrapSite(this.cities[0]);
 
     return new Promise((res) => res([{}]));
   }
@@ -22,13 +21,13 @@ export class ZonapropService implements RealEstateInterface {
     return this.error;
   }
 
-  #baseURL = (city: string, price: number, page: number) =>
+  private baseURL = (city: string, price: number, page: number) =>
     `https://www.zonaprop.com.ar/departamentos-alquiler-${city}-desde-2-hasta-3-ambientes-menos-${price}-pesos.html`;
 
-  #scrapSite = async (city, page = 1) => {
+  private scrapSite = async (city, page = 1) => {
     const maxPrice: number = 50000;
 
-    const { body } = await scrapeIt(this.#baseURL(city, maxPrice, page), {
+    const { body } = await scrapeIt(this.baseURL(city, maxPrice, page), {
       data: zonapropContract,
     });
   };

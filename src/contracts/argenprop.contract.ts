@@ -8,6 +8,11 @@ const argenpropContract = {
     link: {
       selector: "a.card",
       attr: "href",
+      convert: (uri) => `https://www.argenprop.com/${uri}`,
+    },
+    price: {
+      selector: "p.card__price",
+      convert: (price) => parseInt(price.replace("$ ", "").replace(".", "")),
     },
   },
 };

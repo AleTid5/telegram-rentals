@@ -8,19 +8,11 @@ export class ScrapperWorker {
 
   @Cron(CronExpression.EVERY_HOUR)
   runEveryHour() {
-    try {
-      this.scrapperService.start();
-    } catch (e) {
-      console.log(e);
-    }
+    this.scrapperService.start();
   }
 
-  @Timeout(1000)
+  @Timeout(1)
   runOnce() {
-    try {
-      this.scrapperService.start();
-    } catch (e) {
-      console.log(e);
-    }
+    this.scrapperService.start();
   }
 }

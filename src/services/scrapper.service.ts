@@ -1,9 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { RealEstateInterface } from "../interfaces/real_estate.interface";
+import { RealEstateServiceInterface } from "../interfaces/real_estate.interface";
 
 @Injectable()
 export class ScrapperService {
-  constructor(@Inject("RealEstates") private services: RealEstateInterface[]) {}
+  constructor(
+    @Inject("RealEstates") private services: RealEstateServiceInterface[],
+  ) {}
 
   start() {
     this.services.map(async (service) => {

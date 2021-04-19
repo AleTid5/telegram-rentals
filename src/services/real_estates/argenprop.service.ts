@@ -1,23 +1,28 @@
 import { Injectable } from "@nestjs/common";
 import scrapeIt from "scrape-it";
 
-import { RealEstateInterface } from "../../interfaces/real_estate.interface";
+import {
+  RealEstateInterface,
+  RealEstateServiceInterface,
+} from "../../interfaces/real_estate.interface";
 import argenpropContract from "../../contracts/argenprop.contract";
 import { ARGENPROP, RealEstateConfig } from "../../config/real_estates.config";
 
-@Injectable()
-export class ArgenpropService implements RealEstateInterface {
-  private error: string = null;
+const [SAN_ISIDRO, VICENTE_LOPEZ] = ["san-isidro", "vicente-lopez"];
 
-  private maxResults = 20;
-  private results = [];
-  private config = new RealEstateConfig(ARGENPROP);
+@Injectable()
+export class ArgenpropService implements RealEstateServiceInterface {
+  private readonly cities: string[] = [SAN_ISIDRO, VICENTE_LOPEZ];
+  private readonly config = new RealEstateConfig(ARGENPROP);
+  private readonly maxResults = 20;
+  private error: string = null;
+  private results: RealEstateInterface[] = [];
 
   async fetchData(): Promise<object[]> {
     console.log("Fetching Argenprop...");
 
     await Promise.all(
-      this.config.getCities().map(
+      this.cities.map(
         (city) =>
           new Promise(async (res) => {
             res(await this.scrapSite(city));
@@ -36,7 +41,7 @@ export class ArgenpropService implements RealEstateInterface {
     try {
       const {
         data: { data: results },
-      }: { data: { data: object[] } } = await scrapeIt(
+      }: { data: { data: RealEstateInterface[] } } = await scrapeIt(
         this.config.generateURL(city, page),
         {
           data: argenpropContract,
