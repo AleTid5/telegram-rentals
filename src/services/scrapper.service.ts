@@ -29,8 +29,6 @@ export class ScrapperService {
         apartments,
       );
 
-      console.log(newApartments);
-
       if (newApartments.length > 0) {
         this.apartmentService.save(newApartments);
 
@@ -50,6 +48,5 @@ export class ScrapperService {
     return new Promise((res) =>
       res(apartments.filter(({ id }) => !storedApartmentsIds.includes(id))),
     );
-    //return new Promise((res) => res(oldApartments));
   };
 }
