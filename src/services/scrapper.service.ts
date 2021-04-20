@@ -14,7 +14,6 @@ export class ScrapperService {
   ) {}
 
   start() {
-    this.apartmentService.remove("MLA913631705");
     this.services.map(async (service) => {
       const apartments: ApartmentInterface[] = await service.findApartments();
 
@@ -29,6 +28,8 @@ export class ScrapperService {
         service.getName(),
         apartments,
       );
+
+      console.log(newApartments);
 
       if (newApartments.length > 0) {
         this.apartmentService.save(newApartments);
