@@ -1,6 +1,6 @@
-import { ARGENPROP } from "../config/real-estates.config";
+import { BUSCAINMUEBLE } from "../config/real-estates.config";
 
-const argenpropContract = {
+const buscainmuebleContract = {
   listItem: ".listing__items > .listing__item",
   data: {
     id: {
@@ -8,12 +8,12 @@ const argenpropContract = {
       attr: "data-favourite",
     },
     realEstate: {
-      convert: () => ARGENPROP,
+      convert: () => BUSCAINMUEBLE,
     },
     link: {
       selector: "a.card",
       attr: "href",
-      convert: (uri) => `https://www.argenprop.com${uri}`,
+      convert: (uri) => `https://www.buscainmueble.com${uri}`,
     },
     price: {
       selector: "p.card__price",
@@ -22,4 +22,4 @@ const argenpropContract = {
   },
 };
 
-export default argenpropContract;
+export default buscainmuebleContract;

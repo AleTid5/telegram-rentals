@@ -14,7 +14,7 @@ export class ScrapperService {
   ) {}
 
   start() {
-    this.services.map(async (service) => {
+    this.services.forEach(async (service: RealEstateServiceInterface) => {
       const apartments: ApartmentInterface[] = await service.findApartments();
 
       if (service.getError()) {
@@ -24,29 +24,35 @@ export class ScrapperService {
         );
       }
 
-      const newApartments: ApartmentInterface[] = await this.findNewApartments(
+      const storedApartments = await this.apartmentService.findAll(
         service.getName(),
+      );
+
+      if (apartments.length === storedApartments.length) {
+        return;
+      }
+
+      const newApartments: ApartmentInterface[] = await this.findNewApartments(
+        storedApartments,
         apartments,
       );
 
       if (newApartments.length > 0) {
         this.apartmentService.save(newApartments);
 
-        newApartments.forEach(this.notifierServices.notifyNewApartment);
+        if (storedApartments.length > 0) {
+          newApartments.forEach(this.notifierServices.notifyNewApartment);
+        }
       }
     });
   }
 
-  private findNewApartments = async (
-    realEstate: string,
+  private findNewApartments = (
+    storedApartments: ApartmentInterface[],
     apartments: ApartmentInterface[],
-  ): Promise<ApartmentInterface[]> => {
-    const storedApartments = await this.apartmentService.findAll(realEstate);
-
+  ): ApartmentInterface[] => {
     const storedApartmentsIds = storedApartments.map(({ id }) => id);
 
-    return new Promise((res) =>
-      res(apartments.filter(({ id }) => !storedApartmentsIds.includes(id))),
-    );
+    return apartments.filter(({ id }) => !storedApartmentsIds.includes(id));
   };
 }

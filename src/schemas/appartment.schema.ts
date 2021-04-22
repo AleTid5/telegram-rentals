@@ -5,7 +5,7 @@ export type ApartmentDocument = Apartment & Document;
 
 @Schema()
 export class Apartment {
-  @Prop({ index: true, auto: false, unique: true })
+  @Prop()
   id: string;
 
   @Prop()
@@ -19,3 +19,5 @@ export class Apartment {
 }
 
 export const ApartmentSchema = SchemaFactory.createForClass(Apartment);
+
+ApartmentSchema.index({ id: 1, realEstate: 1 }, { unique: true });
